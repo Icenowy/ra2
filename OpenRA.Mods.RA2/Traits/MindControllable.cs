@@ -55,9 +55,11 @@ namespace OpenRA.Mods.RA2.Traits
 
 		public void Killed(Actor self, AttackInfo e)
 		{
-			var mindController = controller.TraitOrDefault<AttackLoyalty>();
-			if (mindController != null)
-				mindController.Victims.Remove(self);
+			if (controller != null) {
+				var mindController = controller.TraitOrDefault<AttackLoyalty> ();
+				if (mindController != null)
+					mindController.Victims.Remove (self);
+			}
 		}
 	}
 }

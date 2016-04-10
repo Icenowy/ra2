@@ -223,7 +223,7 @@ IvanBomberE:
 
 MindControl:
 	ReloadDelay: 200
-	Range: 30c0
+	Range: 7c0
 	Projectile: Bullet
 		Speed: 100
 		High: true
@@ -232,12 +232,11 @@ MindControl:
 		Damage: 10
 		Versus:
 			None: 100
-			Flak: 0
-			Plate: 0
-			Light: 0
-			Medium: 0
-			Heavy: 0
+			Flak: 100
+			Plate: 100
+			Light: 100
+			Medium: 100
+			Heavy: 100
 			Wood: 0
 			Steel: 0
 			Concrete: 0
->>>>>>> 196e4325bb44d746cf501324244af491e19a7725

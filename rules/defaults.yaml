@@ -439,6 +439,7 @@
 	Chronoshiftable:
 		ChronoshiftSound: schrmov.wav
 		ReturnToOrigin: false
+	MindControllable:
 
 ^CivVehicle:
 	Inherits: ^Vehicle

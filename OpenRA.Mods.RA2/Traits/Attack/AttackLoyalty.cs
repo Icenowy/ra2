@@ -20,6 +20,7 @@ namespace OpenRA.Mods.RA2.Traits
 	[Desc("Can change owners of victims with `MindControllable` trait.")]
 	public class AttackLoyaltyInfo : AttackBaseInfo
 	{
+		[Desc("The number of targets that can be controlled once.")]
 		public readonly int TargetsAtOnce = 1;
 
 		public override object Create(ActorInitializer init) { return new AttackLoyalty(init.Self, this); }
@@ -65,10 +66,16 @@ namespace OpenRA.Mods.RA2.Traits
 
 			public override Activity Tick(Actor self)
 			{
-				if (IsCanceled || !target.IsValidFor(self) || !attack.CanAttack(self, target) || attack.Victims.Count > info.TargetsAtOnce)
+				if (IsCanceled || !target.IsValidFor(self) || !attack.CanAttack(self, target) || attack.Victims.Count >= info.TargetsAtOnce)
 					return NextActivity;
-
-				var mindControllable = target.Actor.TraitOrDefault<MindControllable>();
+				MindControllable mindControllable;
+				try {
+					mindControllable = target.Actor.TraitOrDefault<MindControllable>();
+				}
+				catch (System.InvalidOperationException exception) {
+					// The target has died. do nothing
+					return NextActivity;
+				}
 				if (mindControllable != null)
 				{
 					attack.DoAttack(self, target);
@@ -84,9 +91,13 @@ namespace OpenRA.Mods.RA2.Traits
 		{
 			foreach (var victim in Victims)
 			{
-					var mindControllable = victim.TraitOrDefault<MindControllable>();
-					if (mindControllable != null)
-						mindControllable.RevertOwner(victim);
+					try {
+						var mindControllable = victim.TraitOrDefault<MindControllable>();
+						if (mindControllable != null)
+							mindControllable.RevertOwner(victim);
+					} catch (System.InvalidOperationException exception) {
+						// The former victim has died. Do nothing.
+					}
 			}
 		}
 	}

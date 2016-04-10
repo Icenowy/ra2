@@ -79,6 +79,7 @@ dog:
 	-TakeCover:
 	QuantizeFacingsFromSequence:
 		Sequence: stand
+	-MindControllable:
 
 e1:
 	Inherits@1: ^Infantry
