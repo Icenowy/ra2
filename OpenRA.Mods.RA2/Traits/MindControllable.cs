@@ -31,6 +31,11 @@ namespace OpenRA.Mods.RA2.Traits
 			originalOwner = self.Owner;
 		}
 
+		public bool isControlled()
+		{
+			return (controller != null);
+		}
+
 		public void ChangeOwner(Actor self, Actor attacker)
 		{
 			controller = attacker;
@@ -43,6 +48,7 @@ namespace OpenRA.Mods.RA2.Traits
 		{
 			changingOwner = originalOwner;
 			self.ChangeOwner(originalOwner);
+			controller = null;
 		}
 
 		public void OnOwnerChanged(Actor self, Player oldOwner, Player newOwner)
@@ -55,10 +61,14 @@ namespace OpenRA.Mods.RA2.Traits
 
 		public void Killed(Actor self, AttackInfo e)
 		{
-			if (controller != null) {
-				var mindController = controller.TraitOrDefault<AttackLoyalty> ();
-				if (mindController != null)
-					mindController.Victims.Remove (self);
+			try{
+				if (controller != null) {
+					var mindController = controller.TraitOrDefault<AttackLoyalty> ();
+					if (mindController != null)
+						mindController.Victims.Remove (self);
+				}
+			}
+			catch (System.InvalidOperationException exception) {
 			}
 		}
 	}

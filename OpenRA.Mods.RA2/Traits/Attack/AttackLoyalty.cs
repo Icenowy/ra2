@@ -78,6 +78,8 @@ namespace OpenRA.Mods.RA2.Traits
 				}
 				if (mindControllable != null)
 				{
+					if (mindControllable.isControlled())
+						return NextActivity; // Cannot control one unit for more than one times
 					attack.DoAttack(self, target);
 					mindControllable.ChangeOwner(target.Actor, self);
 					attack.Victims.Add(target.Actor);
