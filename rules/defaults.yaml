@@ -405,7 +405,7 @@
 		TargetTypes: Ground, Repair, DetonateAttack
 	Repairable:
 		Voice: Move
-		RepairBuildings: gadept,nadept
+		RepairBuildings: gadept, nadept, caoutp
 	Passenger:
 		Voice: Move
 		CargoType: Vehicle
