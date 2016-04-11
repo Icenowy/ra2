@@ -596,6 +596,7 @@ nairon:
 	Power:
 		Amount: -200
 	GrantUpgradePower@IRONCURTAIN:
+		OrderName: Invulnerability
 		Icon: invuln
 		ChargeTime: 120
 		Description: Invulnerability
