@@ -42,3 +42,23 @@ caoutp:
 	icon: xxicon
 		Offset: 0,0
 		UseTilesetCode: false
+
+caairp:
+	Defaults:
+		UseTilesetCode: false
+	idle:
+		ShadowStart: 4
+		Offset: -30, -75
+	damaged-idle:
+		Start: 1
+		ShadowStart: 5
+		Offset: -30, -75
+	idle-lights: caairp_a
+		Length: 9
+		ShadowStart: 9
+		Tick: 50
+	idle-flag: caairp_f
+		Length: 16
+		ShadowStart: 16
+		Tick: 300
+
